@@ -1,0 +1,86 @@
+<ng-container *ngIf="attribute === attributeEnum.Basic">
+    <ng-container *ngIf="type === typeEnum.Disabled">
+        <button mat-button disabled>{{text}}</button>
+    </ng-container>
+    <ng-container *ngIf="type === typeEnum.Link">
+        <a mat-button href="https://www.google.com/" target="_blank">{{text}}</a>
+    </ng-container>
+    <ng-container *ngIf="![typeEnum.Disabled, typeEnum.Link].includes(type)">
+        <button class="test-class" mat-button color="{{color}}">{{text}}</button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.Raised">
+    <ng-container *ngIf="type === typeEnum.Disabled">
+        <button mat-raised-button disabled>{{text}}</button>
+    </ng-container>
+    <ng-container *ngIf="type === typeEnum.Link">
+        <a mat-raised-button href="https://www.google.com/" target="_blank">{{text}}</a>
+    </ng-container>
+    <ng-container *ngIf="![typeEnum.Disabled, typeEnum.Link].includes(type)">
+        <button mat-raised-button color="{{color}}">{{text}}</button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.Stroked">
+    <ng-container *ngIf="type === typeEnum.Disabled">
+        <button mat-stroked-button disabled>{{text}}</button>
+    </ng-container>
+    <ng-container *ngIf="type === typeEnum.Link">
+        <a mat-stroked-button href="https://www.google.com/" target="_blank">{{text}}</a>
+    </ng-container>
+    <ng-container *ngIf="![typeEnum.Disabled, typeEnum.Link].includes(type)">
+        <button mat-stroked-button color="{{color}}">{{text}}</button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.Flat">
+    <ng-container *ngIf="type === typeEnum.Disabled">
+        <button mat-flat-button disabled>{{text}}</button>
+    </ng-container>
+    <ng-container *ngIf="type === typeEnum.Link">
+        <a mat-flat-button href="https://www.google.com/" target="_blank">{{text}}</a>
+    </ng-container>
+    <ng-container *ngIf="![typeEnum.Disabled, typeEnum.Link].includes(type)">
+        <button mat-flat-button color="{{color}}">{{text}}</button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.Icon">
+    <ng-container *ngIf="iconType === iconTypeEnum.OpenInNew">
+        <button mat-icon-button disabled>
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+    <ng-container *ngIf="![iconTypeEnum.OpenInNew].includes(iconType)">
+        <button mat-icon-button color="{{color}}">
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.FAB">
+    <ng-container *ngIf="iconType === iconTypeEnum.Favorite">
+        <button mat-fab disabled>
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+    <ng-container *ngIf="![iconTypeEnum.Favorite].includes(iconType)">
+        <button mat-fab color="{{color}}">
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="attribute === attributeEnum.MiniFAB">
+    <ng-container *ngIf="iconType === iconTypeEnum.Home">
+        <button mat-mini-fab disabled>
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+    <ng-container *ngIf="![iconTypeEnum.Home].includes(iconType)">
+        <button mat-mini-fab color="{{color}}">
+            <mat-icon>{{iconType}}</mat-icon>
+        </button>
+    </ng-container>
+</ng-container>

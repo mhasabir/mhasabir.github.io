@@ -1,0 +1,47 @@
+.table-container {
+  max-height: calc(100vh - 60px); // or height: calc(100vh - 155px); depending on your need  change
+  overflow: auto;
+}
+table {
+  width: 100%;
+}
+.mat-row .mat-cell{
+  padding-left: 20px;
+  border-bottom: 1px solid;
+  vertical-align: middle;
+  // border-top: 2px solid transparent;
+  cursor: pointer;
+}
+.mat-header-cell{
+  padding-top: 15px;
+  padding-left: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+.fa-eye {
+  color: purple
+}
+.fa-trash {
+  color: red
+}
+.action{
+  float: left;
+  margin-right: .5rem;
+}
+.selected{
+  background-color: #EEE5F0;
+}
+// overwrite the checkbox background
+::ng-deep .mat-checkbox-checked .mat-checkbox-background{
+  background-color: #9C27B0 !important;
+}
+::ng-deep .mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: #9C27B0 !important;
+}
+// overwrite the ripple overlay on hover and click
+::ng-deep .mat-checkbox:not(.mat-checkbox-disabled) .mat-checkbox-ripple .mat-ripple-element {
+  background-color: #9C27B0 !important;
+}

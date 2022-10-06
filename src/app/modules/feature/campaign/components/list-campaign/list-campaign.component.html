@@ -1,0 +1,9 @@
+<app-mat-table [columns]="columns" [dataSource]="dataSource" [totalCount]="totalCount"
+[footers]="footers"
+(getDataSource)="getDataSource($event)"
+(actionClicked)="onActionClicked($event)"
+(rowSelected)="onRowSelected($event)"
+(rowDeselected)="onRowDeselected($event)"
+></app-mat-table>
+<!-- <app-custom-table [columns]="columns" [dataSource]="dataSource"></app-custom-table> -->
+<!-- <app-table [columns]="columns" [dataSource]="dataSource"></app-table> -->

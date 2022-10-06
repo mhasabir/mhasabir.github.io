@@ -1,0 +1,50 @@
+<!-- <div class="row right-content mar-top-10">
+  <div class="tabcontent-box no-padd">
+    <form [formGroup]="campaignForm" (ngSubmit)="save()" (keyup.enter)="save()" novalidate autocomplete="off">
+
+      <p class="box-title pad-15 box-header">
+        <span class=" primary-color">Edit Personal Information</span>
+        <button type="submit" class="icon-box pad-5-15 buttons primary-bg pull-right mar-left-5">
+          Save
+        </button>
+        <button class="icon-box pad-5-15 buttons danger-bg  pull-right mar-left-5">
+          Delete
+        </button>
+      </p>
+      <br />
+      <div class="col-md-4 pull-left">
+        <div class="box-content">
+          <app-text-box placeholder="Varchar Data" formControlName="varcharData"></app-text-box>
+          <div class="mar-top-10">
+            <app-text-box placeholder="Email Data" formControlName="emailData"></app-text-box>
+          </div>
+          <div class="mar-top-10">
+            <app-number-box placeholder="Decimal Data" formControlName="decimalData"></app-number-box>
+          </div>
+          <div class="mar-top-10">
+            <app-number-box placeholder="Float Data" formControlName="floatData"></app-number-box>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pull-left">
+        <div class="box-content">
+          <div class="care-box  ">
+            <app-select-dropdown placeholder="Dropdown" formControlName="dropdownId"></app-select-dropdown>
+          </div>
+          <div class="care-box  mar-top-10">
+            <select type="text" class="care-input-area selectbox" name="gender">
+              <option value="0">Religion</option>
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <br />
+      <span *ngIf="bForm.varcharData.errors && bForm.varcharData.errors.required"> Title is required</span>
+      <span *ngIf="bForm.varcharData.errors && bForm.varcharData.errors.minlength"> Min length 4</span>
+      <span *ngIf="bForm.varcharData.errors && bForm.varcharData.errors.maxlength"> Max length 10</span>
+    </form>
+  </div>
+</div> -->

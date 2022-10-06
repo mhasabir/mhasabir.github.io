@@ -1,0 +1,21 @@
+:host {
+    width: 100%;
+    .mat-form-field {
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+.remove_underline {
+    ::ng-deep.mat-form-field-underline {
+        display: none;
+    }
+}
+.icons-search,
+.icons-down {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.5rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+}

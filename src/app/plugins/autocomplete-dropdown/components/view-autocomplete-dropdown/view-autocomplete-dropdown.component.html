@@ -1,0 +1,5 @@
+<div class="plugin_container">
+    <app-autocomplete-dropdown [config]="actionTypeConfig" [dataSource]="productList" [value]="selectedProduct?.Id"
+        (notifyChange)="selectedActionType($event)">
+    </app-autocomplete-dropdown>
+</div>

@@ -1,0 +1,46 @@
+<mat-form-field [ngClass]="{'remove_underline': config.removeUnderline}" floatLabel="always"
+    appearance="{{config.appearance}}">
+    <mat-label>{{config.headerText}}</mat-label>
+
+    <input type="text" placeholder="{{config.placeholder}}" aria-label="Number" matInput [matAutocomplete]="auto"
+        [formControl]="inputFormControl" [(ngModel)]="inputValueStr">
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
+
+        <!-- <mat-option *ngFor="let data of filteredData | async" [value]="data">
+            <ng-container *ngFor="let col of config.columns">
+                <ng-container *ngIf="col.isStaticData && col.showInDropdown">
+                    {{col.name}}
+                </ng-container>
+                <ng-container *ngIf="!col.isStaticData && col.showInDropdown">
+                    {{data[col.name]}}
+                </ng-container>
+            </ng-container>
+        </mat-option> -->
+
+        <mat-option *ngFor="let data of filteredData | async; let i = index;" [value]="data">
+            <ng-container *ngIf="template">
+                <!-- <ng-container *ngTemplateOutlet="template"></ng-container> -->
+                <ng-template ngFor let-data [ngForOf]="[data]" [ngForTemplate]="template">
+                </ng-template>
+            </ng-container>
+            <ng-container *ngIf="!template">
+                <ng-container *ngIf="isDataSourceObjectType">
+                    <ng-container *ngFor="let col of config.columns">
+                        <ng-container *ngIf="col.isStaticData">
+                            {{col.name}}
+                        </ng-container>
+                        <ng-container *ngIf="!col.isStaticData">
+                            {{data[col.name]}}
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!isDataSourceObjectType">
+                    {{data}}
+                </ng-container>
+            </ng-container>
+        </mat-option>
+
+    </mat-autocomplete>
+    <span class="{{config.iconClass}}" (click)="onClicked($event)"></span>
+</mat-form-field>

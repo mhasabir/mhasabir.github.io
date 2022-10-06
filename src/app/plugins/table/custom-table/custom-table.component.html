@@ -1,0 +1,97 @@
+<!-- <div class="row  right-content mar-top-10"> -->
+  <div class="tabcontent-box no-padd">
+    <div class="box-title pad-15 box-header white-bg">
+      <div class=" primary-color">
+        <div class="col-md-6 pull-left">
+          <div class="care-box">
+            <input type="text" autocomplete="off" class="care-input-area small" placeholder="Search" value=""
+              name="username" />
+            <!--<span class="care-placeholder small">Search</span>-->
+          </div>
+        </div>
+        <div class="col-md-1 pull-left">
+          <button class="icon-box small pad-0-25 small">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <button class="icon-box pad-5-15 buttons primary-bg pull-right mar-left-5">
+        Add New
+      </button>
+      <button class="icon-box pad-5-15 buttons  pull-right mar-left-5">
+        Edit
+      </button>
+      <button class="icon-box pad-5-15 buttons danger-bg  pull-right mar-left-5">
+        Delete
+      </button>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="table-h-o">
+      <table class="grid-table">
+        <thead>
+          <tr>
+            <th>
+              <div class="care-check-box">
+                <input type="checkbox" class="checkbox" value="1" />
+              </div>
+            </th>
+            <ng-container *ngFor="let col of columns">
+              <ng-container *ngIf="col.visible">
+                <th>{{col.header}}</th>
+              </ng-container>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody class="for-scroll">
+          <ng-container *ngFor="let data of dataSource">
+            <tr>
+              <th>
+                <div class="care-check-box">
+                  <input type="checkbox" class="checkbox" value="1" />
+                </div>
+              </th>
+              <ng-container *ngFor="let col of columns">
+                <ng-container *ngIf="col.visible">
+                  <td>{{data[col.name]}}</td>
+                </ng-container>
+              </ng-container>
+              <td>
+                <a href="#" class="mar-10"><i class="fa fa-eye primary-color "></i></a>
+                <a href="#" class="mar-10"><i class="fa fa-pencil "></i></a>
+                <a href="#" class="mar-10"><i class="fa fa-trash danger"></i></a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="pagination-area">
+      <div class="col-md-1 pull-left">
+        Rows Per Page
+      </div>
+      <div class="col-md-1 pull-left">
+        <select type="text" class="selectbox small" name="gender">
+          <option value="">Select</option>
+          <option value="30">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+        </select>
+      </div>
+
+      <div class="col-md-1 pull-right mar-left-5 tright paging">
+        <a href="#" class="mar-left-5 ">|<i class="fa fa-chevron-left"></i></a>
+        <a href="#" class="mar-left-5"><i class="fa fa-chevron-left "></i></a>
+        <a href="#" class="mar-left-5"><i class="fa fa-chevron-right "></i></a>
+        <a href="#" class="mar-left-5"><i class="fa fa-chevron-right"></i>|</a>
+      </div>
+      <div class="col-md-1 pull-right mar-left-5">
+        1 to 10 of 100
+      </div>
+
+
+
+    </div>
+  </div>
+<!-- </div> -->

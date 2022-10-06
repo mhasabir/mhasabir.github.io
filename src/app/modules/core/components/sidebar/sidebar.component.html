@@ -1,0 +1,36 @@
+<div class="left-bg">
+  <ul class="care-left-nav">
+    <ng-container *ngFor="let item of sidebarItems">
+      <li class="" [ngClass]="{'has-sub': item.childItems.length > 0}">
+        <!-- <a [routerLink]="[item.route]"> -->
+        <a  [ngClass]="{'active': item.route === selectedItem?.route}"(click)="selectSidebarItem(item)">
+          <i class="{{item.icon}}"></i>
+          <span class="mtext">{{item.label}}</span>
+          <i *ngIf="item.childItems.length > 0" class="fa fa-chevron-right arrow-r"></i>
+        </a>
+      </li>
+      <ng-container *ngIf="item.showChild">
+        <ng-container *ngFor="let child of item.childItems">
+          <li class="" [ngClass]="{'has-sub': child.childItems.length > 0}">
+            <a [ngClass]="{'active': child.route === selectedItem?.route}" (click)="selectChildSidebarItem(child, item)">
+              <i class="{{child.icon}}"></i>
+              <span class="mtext">{{child.label}}</span>
+              <i *ngIf="child.childItems.length > 0" class="fa fa-chevron-right arrow-r"></i>
+            </a>
+          </li>
+          <ng-container *ngIf="child.showChild">
+            <ng-container *ngFor="let secondChild of child.childItems">
+              <li class="" [ngClass]="{'has-sub': child.childItems.length > 0}">
+                <a [ngClass]="{'active': secondChild.route === selectedItem?.route}" (click)="selectSecondChildSidebarItem(secondChild, child, item)">
+                  <i class="{{secondChild.icon}}"></i>
+                  <span class="mtext">{{secondChild.label}}</span>
+                  <i *ngIf="secondChild.childItems.length > 0" class="fa fa-chevron-right arrow-r"></i>
+                </a>
+              </li>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ul>
+</div>

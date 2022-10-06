@@ -1,0 +1,134 @@
+<!-- <div class="example-container mat-elevation-z8"> -->
+<!-- <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      GitHub's API rate limit has been reached. It will be reset in one minute.
+    </div>
+  </div> -->
+
+<div class="table-container">
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="name" matSortDisableClear
+    matSortDirection="desc" (matSortChange)="announceSortChange($event)" cdkDropList cdkDropListOrientation="horizontal"
+    (cdkDropListDropped)="drop($event)">
+
+    <!-- Column Defination Start-->
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"
+          >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)"
+          >
+        </mat-checkbox>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="col.name" *ngFor="let col of columns">
+
+      <!-- Header -->
+      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear cdkDrag>
+        {{col.header}}
+      </th>
+
+      <!-- Content -->
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="col.type === 'string'">
+          {{element[col.name]}}
+        </ng-container>
+        <ng-container *ngIf="col.type === 'number'">
+          <div *ngIf="col.format">{{element[col.name] | number: col.format}}</div>
+          <div *ngIf="!col.format">{{element[col.name]}}</div>
+        </ng-container>
+        <ng-container *ngIf="col.type === 'currency'">
+          <div *ngIf="col.format">{{element[col.name] | currency: col.format}}</div>
+          <div *ngIf="!col.format">{{element[col.name] | currency}}</div>
+        </ng-container>
+        <ng-container *ngIf="col.type === 'datetime'">
+          <div *ngIf="col.format">{{element[col.name] | date: col.format}}</div>
+          <div *ngIf="!col.format">{{element[col.name]}}</div>
+        </ng-container>
+        <ng-container *ngIf="col.type === 'boolean'">
+          <div *ngIf="col.format === 'checkbox'">
+            <mat-checkbox [checked]="element[col.name]" [disabled]="true" [disableRipple]="true"
+              (click)="$event.preventDefault()"></mat-checkbox>
+          </div>
+          <div *ngIf="col.format === 'yesNo'">{{element[col.name] | yesNo}}</div>
+          <div *ngIf="!col.format">{{element[col.name]}}</div>
+        </ng-container>
+        <ng-container *ngIf="col.type === 'image'">
+          <img src="{{element[col.name]}}" alt="Image not found" width="96" height="96">
+        </ng-container>
+        <ng-container *ngIf="col.type === 'link'">
+          <a href="{{element[col.name]}}">{{element[col.name]}}</a>
+        </ng-container>
+        <ng-container *ngIf="!['string','number','currency','datetime','boolean','image','link'].includes(col.type)">
+          {{element[col.name]}}
+        </ng-container>
+      </td>
+
+      <!-- Footer -->
+      <td mat-footer-cell *matFooterCellDef>
+        <ng-container *ngIf="col.footer">
+          <div *ngIf="col.footer.format">
+            <div *ngIf="col.type === 'number'">{{col.footer.value | number: col.footer.format}}</div>
+            <div *ngIf="col.type === 'currency'">{{col.footer.value | currency: col.footer.format}}</div>
+            <div *ngIf="col.type === 'datetime'">{{col.footer.value | date: col.footer.format}}</div>
+          </div>
+          <div *ngIf="!col.footer.format">
+            {{col.footer.value}}
+          </div>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="Actions" *ngIf="actions?.length">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngFor="let act of actions">
+          <div class="action" *ngIf="act === 'view'" (click)="onActionClicked($event, act, element)"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></div>
+          <div class="action" *ngIf="act === 'edit'" (click)="onActionClicked($event, act, element)"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></div>
+          <div class="action" *ngIf="act === 'delete'" (click)="onActionClicked($event, act, element)"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></div>
+        </ng-container>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Column Defination End-->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr [ngClass]="{'selected': selection.isSelected(row)}"
+        mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked($event, row)"
+      ></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    <!-- matRipple -->
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">{{noDataMsg}}</td>
+    </tr>
+
+  </table>
+</div>
+
+<ng-container *ngIf="allowPaging">
+  <mat-paginator
+    [length]="pageSettings.totalCount"
+    [pageSize]="pageSettings.pageSize"
+    [showFirstLastButtons]="pageSettings.showFirstLastButtons"
+    [pageSizeOptions]="pageSettings.pageSizeOptions"
+    [pageIndex]="pageSettings.pageIndex"
+    (page)="handlePageEvent($event)"
+    aria-label="Select page">
+  </mat-paginator>
+</ng-container>
+
+<!-- </div> -->
