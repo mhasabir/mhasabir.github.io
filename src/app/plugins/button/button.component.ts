@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs';
 import { ButtonConfig } from './button.model';
+declare const gtag: Function; // <------------Important: the declartion for gtag is required!
 
 @Component({
   selector: 'app-button',
@@ -16,8 +19,16 @@ export class ButtonComponent implements OnInit {
   //#endregion
 
   //#region Constructor
-  constructor() {
-
+  constructor(private router: Router) {
+    /** START : Code to Track Page View using gtag.js */
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+       gtag('event', 'page_view', {
+          page_path: event.urlAfterRedirects
+       })
+      });
+      /** END : Code to Track Page View  using gtag.js */
   }
   //#endregion
 
@@ -138,6 +149,16 @@ export class ButtonComponent implements OnInit {
     if ($event) {
       $event.stopPropagation();
     }
+    gtag('event', 'TRACK_ME_BUTTON_CLICKED', 
+      {
+        'event_category': 'BUTTON_CLICK',
+        'event_label': 'Track Me Click',
+        'value': 'Put a value here that is meaningful with respect to the click event'   
+      }
+    )
+      
+    // let dataLayer = window.dataLayer || [];
+    // dataLayer.push({'event': 'login'});
     // this.inputFormControl.setValue('');
   }
   //#endregion

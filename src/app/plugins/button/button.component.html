@@ -6,7 +6,7 @@
         <a mat-button href="https://www.google.com/" target="_blank">{{text}}</a>
     </ng-container>
     <ng-container *ngIf="![typeEnum.Disabled, typeEnum.Link].includes(type)">
-        <button (click)="dataLayer.push({'event': 'login'});" mat-button color="{{color}}">{{text}}</button>
+        <button (click)="onClicked($event)" mat-button color="{{color}}">{{text}}</button>
     </ng-container>
 </ng-container>
 
